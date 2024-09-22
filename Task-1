@@ -1,0 +1,29 @@
+/*the code is based on the dataset that shows the trend of women’s education levels over the past 5 years*/
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+np.random.seed(42)
+years = [2019, 2020, 2021, 2022, 2023]
+education_levels = ['Primary', 'Secondary', 'Tertiary']
+data = {
+    'year': np.repeat(years, len(education_levels)),
+    'education_level': education_levels * len(years),
+    'number_of_women': np.random.randint(5000, 20000, size=len(years) * len(education_levels))
+}
+df = pd.DataFrame(data)
+print(df)
+plt.figure(figsize=(10, 6))
+sns.lineplot(x='year', y='number_of_women', hue='education_level', marker='o', data=df)
+plt.title('Women Education Trends Over the Last 5 Years')
+plt.xlabel('Year')
+plt.ylabel('Number of Women')
+plt.xticks(years)
+plt.grid(True)
+plt.show()
+plt.figure(figsize=(10, 6))
+sns.barplot(x='year', y='number_of_women', hue='education_level', data=df)
+plt.title('Number of Women in Different Education Levels (Last 5 Years)')
+plt.xlabel('Year')
+plt.ylabel('Number of Women')
+plt.show()
